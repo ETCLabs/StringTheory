@@ -1,0 +1,19 @@
+<RCC>
+    <qresource prefix="/">
+        <file>filenew.png</file>
+        <file>filesave.png</file>
+        <file>info.png</file>
+        <file>help.png</file>
+        <file>info_off.png</file>
+        <file>received.png</file>
+        <file>received_off.png</file>
+        <file>sent.png</file>
+        <file>sent_off.png</file>
+        <file>warning.png</file>
+        <file>appicon32w.png</file>
+        <file>appicon64w.png</file>
+        <file>appicon128w.png</file>
+        <file>autosend.png</file>
+        <file>autosend_off.png</file>
+    </qresource>
+</RCC>

@@ -1,0 +1,10 @@
+<RCC>
+    <qresource prefix="/">
+        <file>warning.png</file>
+        <file>ok.png</file>
+        <file>working.png</file>
+        <file>connect_creating.png</file>
+        <file>connect_established.png</file>
+        <file>connect_no.png</file>
+    </qresource>
+</RCC>
