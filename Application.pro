@@ -52,8 +52,14 @@ FORMS    += ui/mainwindow.ui \
     ui/textformat.ui \
     ui/aboutdialog.ui
 
-RC_FILE = res/resources.rc
-OTHER_FILES += res/resources.rc
+win32 {
+    RC_FILE = res/resources.rc
+    OTHER_FILES += res/resources.rc
+}
+
+macx {
+    ICON = res/icon.icns
+}
 
 RESOURCES += \
     res/resources.qrc
@@ -108,18 +114,22 @@ win32 {
 }
 macx {
     VERSION = $$system(echo $$GIT_VERSION | sed 's/[a-zA-Z]//')
-    TARGET_CUSTOM_EXT = .exe
+
+
+    PLUGINS_SRC = $$system_path($${OUT_PWD}/app/stPlugin_*)
+    PLUGINS_DST = $$system_path($${OUT_PWD}/app/StringTheory.app/Contents/MacOS/)
+
+    PRE_DEPLOY_COMMAND += $$QMAKE_COPY $${PLUGINS_SRC} $${PLUGINS_DST} $$escape_expand(\\n\\t)
 
     DEPLOY_DIR = $${_PRO_FILE_PWD_}/install/mac
-    DEPLOY_TARGET = $${OUT_PWD}/$${TARGET}$${TARGET_CUSTOM_EXT}
+    DEPLOY_TARGET = $${OUT_PWD}/app/$${TARGET}$${TARGET_CUSTOM_EXT}
 
     DEPLOY_COMMAND = macdeployqt
-    DEPLOY_OPT = -serialport -network
     DEPLOY_CLEANUP = $${QMAKE_DEL_FILE} $${DEPLOY_DIR}/StringTheory*.dmg
 
     DEPLOY_INSTALLER = $${_PRO_FILE_PWD_}/install/mac/create-dmg --volname "StringTheory_Installer" --volicon "$${_PRO_FILE_PWD_}/res/icon.icns"
     DEPLOY_INSTALLER += --background "$${_PRO_FILE_PWD_}/res/mac_install_bg.png" --window-pos 200 120 --window-size 800 400 --icon-size 100 --icon $${TARGET}$${TARGET_CUSTOM_EXT} 200 190 --hide-extension $${TARGET}$${TARGET_CUSTOM_EXT} --app-drop-link 600 185
-    DEPLOY_INSTALLER += $${DEPLOY_DIR}/StringTheory_$${VERSION}.dmg $${OUT_PWD}/$${TARGET}$${TARGET_CUSTOM_EXT}
+    DEPLOY_INSTALLER += $${DEPLOY_DIR}/StringTheory_$${VERSION}.dmg $${OUT_PWD}/app/$${TARGET}$${TARGET_CUSTOM_EXT}
 }
 
 CONFIG( release , debug | release) {

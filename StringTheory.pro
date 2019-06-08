@@ -23,8 +23,8 @@
 TEMPLATE = subdirs
 CONFIG += ordered
 
-# Include the dissector plugins here
 SUBDIRS +=  $$files($${_PRO_FILE_PWD_}/plugins/*.pro, true) \
             $${_PRO_FILE_PWD_}/Application.pro
+
 
 

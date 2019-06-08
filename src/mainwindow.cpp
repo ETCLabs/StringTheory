@@ -142,7 +142,7 @@ MainWindow::~MainWindow()
 void MainWindow::loadPlugins()
 {
     // Discover plugins and add their contents to the list of comms handlers
-    QDir pluginsDir = QDir::currentPath();
+    QDir pluginsDir = QDir(QCoreApplication::applicationDirPath());
     pluginsDir.setNameFilters(QStringList("stPlugin_*"));
     loadPluginFolder(pluginsDir);
 }

@@ -120,7 +120,7 @@ void TcpComms::close()
     m_tcpSocket = 0;
 }
 
-void TcpComms::transmit(QByteArray &data)
+void TcpComms::transmit(const QByteArray &data)
 {
     // Can only transmit if socket exists and is connected
     if (!m_tcpSocket)

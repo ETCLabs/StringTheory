@@ -2,9 +2,11 @@
 
 #include <QDebug>
 
+#ifdef Q_OS_WIN
 #include <WinSock2.h>
 #include <IPHlpApi.h>
 #include <IcmpAPI.h>
+#endif
 
 Ping::Ping(QObject *parent) :
     QObject(parent)
@@ -13,6 +15,7 @@ Ping::Ping(QObject *parent) :
 
 void Ping::ping(QString host, int timeout)
 {
+#ifdef Q_OS_WIN
     HANDLE hIcmpFile;
     unsigned long ipaddr = INADDR_NONE;
     DWORD dwRetVal = 0;
@@ -89,4 +92,5 @@ void Ping::ping(QString host, int timeout)
         return;
     }
     return;
+#endif
 }
