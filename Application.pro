@@ -64,6 +64,12 @@ macx {
 RESOURCES += \
     res/resources.qrc
 
+# Debug symbols
+win32 {
+    QMAKE_CXXFLAGS += /Zi
+    QMAKE_LFLAGS += /INCREMENTAL:NO /Debug
+}
+
 # Extract the version using GIT tags
 GIT_COMMAND = git --git-dir $$shell_quote($$PWD/.git) --work-tree $$shell_quote($$PWD)
 GIT_VERSION = $$system($$GIT_COMMAND describe --always --tags)
@@ -74,6 +80,7 @@ GIT_DATE_YEAR = $$system($$GIT_COMMAND show -s --date=format:\"%Y\" --format=\"%
 GIT_TAG = $$system($$GIT_COMMAND describe --abbrev=0 --always --tags)
 GIT_SHA1 = $$system($$GIT_COMMAND rev-parse --short HEAD)
 
+DEFINES += VERSION=\\\"$$GIT_VERSION\\\"
 DEFINES += GIT_CURRENT_SHA1=\\\"$$GIT_VERSION\\\"
 DEFINES += GIT_DATE_DAY=\\\"$$GIT_DATE_DAY\\\"
 DEFINES += GIT_DATE_DATE=\\\"$$GIT_DATE_DATE\\\"

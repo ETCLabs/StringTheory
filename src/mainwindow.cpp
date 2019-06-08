@@ -74,8 +74,7 @@ MainWindow::MainWindow(QWidget *parent) :
     m_autoSend = ui->actionAutoSend->isChecked();
 
     // Set title etc
-    this->setWindowTitle(QString("%1 v%2")
-                         .arg(qApp->applicationName(), qApp->applicationVersion()));
+    this->setWindowTitle(qApp->applicationName());
 
     m_dataModel = new DataTableModel(this);
     m_dataModel->setDataEntry(m_dataHandlers[m_currentData]);
