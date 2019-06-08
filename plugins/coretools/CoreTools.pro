@@ -20,9 +20,9 @@
 
 QT       += core gui network widgets serialport
 
-TARGET = $$qtLibraryTarget(stPlugin_coretools)
+TARGET = stPlugin_coretools
 TEMPLATE = lib
-CONFIG  += plugin
+CONFIG  += plugin no_plugin_name_prefix
 DESTDIR = $$OUT_PWD/../../app
 
 INCLUDEPATH += ../interface

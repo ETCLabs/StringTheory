@@ -65,7 +65,7 @@ public slots:
     virtual void open() = 0;
     virtual void close() = 0;
 
-    virtual void transmit(QByteArray &data) = 0;
+    virtual void transmit(const QByteArray &data) = 0;
 };
 
 #endif // GENERICCOMMS_H
