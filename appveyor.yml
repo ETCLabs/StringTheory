@@ -12,7 +12,7 @@
 #skip_non_tags: true
 
 # Build worker image (VM template)
-image: Visual Studio 2015
+image: Visual Studio 2017
 
 #---------------------------------#
 #       build configuration       #
