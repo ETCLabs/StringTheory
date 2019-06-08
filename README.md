@@ -1,4 +1,7 @@
 # StringTheory
+[![Build Status](https://travis-ci.org/ETCLabs/StringTheory.svg?branch=master)](https://travis-ci.org/ETCLabs/StringTheory)
+[![Build status](https://ci.appveyor.com/api/projects/status/60dd8kksnldnt9ce?svg=true)](https://ci.appveyor.com/project/docsteer/stringtheory)
+
 StringTheory is a simple free, open-source tool to send and recieve string data over a variety of methods and formats, to test interaction of strings in lighting control products. It is provided by ETC Inc without any warranty, in the hope that it is a useful tool.
 
 # Supported Platforms
