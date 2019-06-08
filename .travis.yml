@@ -1,0 +1,16 @@
+language: cpp
+os: osx
+osx_image: xcode8.3
+before_install:
+  - brew update
+install:
+  # QT
+  - brew install qt
+  - brew link --force qt
+script:
+  - qmake
+  - make -j4
+after_success:
+  - FILE=$(echo `pwd`/`ls install/mac/*.dmg`)
+  - BASENAME=$(basename $FILE)
+  - echo "Uploading $BASENAME to file.io..." && curl -sF "file=@$FILE" https://file.io | xargs printf "$BASENAME uploaded - %s\n"
