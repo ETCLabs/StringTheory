@@ -188,7 +188,7 @@ void SerialComms::close()
     }
 }
 
-void SerialComms::transmit(QByteArray &data)
+void SerialComms::transmit(const QByteArray &data)
 {
     if (m_serialPort->isOpen())
     {

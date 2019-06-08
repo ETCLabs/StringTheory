@@ -29,7 +29,7 @@ public slots:
     void open();
     void close();
 
-    void transmit(QByteArray &data);
+    void transmit(const QByteArray &data);
 
 private:
     Ui::SerialCommsForm *ui;

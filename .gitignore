@@ -46,3 +46,6 @@ Makefile*
 *.AppImage
 *.deb
 *.log
+
+#MacOS stuff
+.DS_Store

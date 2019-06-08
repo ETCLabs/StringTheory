@@ -80,7 +80,7 @@ void UdpComms::close()
     m_udpSocket->disconnectFromHost();
 }
 
-void UdpComms::transmit(QByteArray &data)
+void UdpComms::transmit(const QByteArray &data)
 {
     QString dest = ui->edTxIp->text();
     quint16 port = ui->spinTxPort->value();
