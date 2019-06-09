@@ -30,10 +30,10 @@ TcpComms::TcpComms(QObject *parent) :
     m_pingThread->start();
 
     // Icons
-    m_disconnectedIcon.addFile(":/icons/connect_no.png", QSize(), QIcon::Disabled);
-    m_disconnectedIcon.addFile(":/icons/connect_creating.png", QSize(), QIcon::Normal);
-    m_waitingIcon.addFile(":/icons/working.png");
-    m_connectedIcon.addFile(":/icons/connect_established.png");
+    m_disconnectedIcon.addFile(":/connect_no.png", QSize(), QIcon::Disabled);
+    m_disconnectedIcon.addFile(":/connect_creating.png", QSize(), QIcon::Normal);
+    m_waitingIcon.addFile(":/working.png");
+    m_connectedIcon.addFile(":/connect_established.png");
 
     // Configuration widget
     m_configWidget = new QWidget;
@@ -255,7 +255,7 @@ bool TcpComms::tryTcpRemote()
     }
     // Invalid IP, disable Ping and Connect buttons
     ui->btnPing->setEnabled(false);
-    ui->btnPing->setIcon(QIcon(":/icons/working.png"));
+    ui->btnPing->setIcon(QIcon(":/working.png"));
     ui->btnPing->setToolTip(tr("Invalid IP"));
     ui->btnConnect->setEnabled(false);
     return false;
@@ -495,7 +495,7 @@ void TcpComms::remotePortChanged()
 void TcpComms::doPing()
 {
     ui->btnPing->setEnabled(false);
-    ui->btnPing->setIcon(QIcon(":/icons/working.png"));
+    ui->btnPing->setIcon(QIcon(":/working.png"));
     if (m_userRemoteIp.protocol() != QAbstractSocket::IPv4Protocol)
     {
         ui->btnPing->setToolTip(tr("Invalid IP"));
@@ -509,7 +509,7 @@ void TcpComms::onPingSuccess(QString host, int time)
 {
     if (host != m_userRemoteIp.toString()) return;
     ui->btnPing->setEnabled(true);
-    ui->btnPing->setIcon(QIcon(":/icons/ok.png"));
+    ui->btnPing->setIcon(QIcon(":/ok.png"));
     ui->btnPing->setToolTip(tr("%1 roundtrip %2ms")
                             .arg(host).arg(time));
 }
@@ -518,6 +518,6 @@ void TcpComms::onPingFailure(QString host, QString message)
 {
     if (host != m_userRemoteIp.toString()) return;
     ui->btnPing->setEnabled(true);
-    ui->btnPing->setIcon(QIcon(":/icons/warning.png"));
+    ui->btnPing->setIcon(QIcon(":/warning.png"));
     ui->btnPing->setToolTip(tr("%1: %2").arg(host, message));
 }

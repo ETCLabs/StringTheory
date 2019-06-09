@@ -127,7 +127,7 @@ void UdpComms::udpDataReceived()
 void UdpComms::onPingSuccess(QString host, int time)
 {
     ui->btnPing->setEnabled(true);
-    ui->btnPing->setIcon(QIcon(":/icons/ok.png"));
+    ui->btnPing->setIcon(QIcon(":/ok.png"));
     ui->btnPing->setToolTip(tr("%1 roundtrip %2ms")
                             .arg(host).arg(time));
 }
@@ -135,7 +135,7 @@ void UdpComms::onPingSuccess(QString host, int time)
 void UdpComms::onPingFailure(QString host, QString message)
 {
     ui->btnPing->setEnabled(true);
-    ui->btnPing->setIcon(QIcon(":/icons/warning.png"));
+    ui->btnPing->setIcon(QIcon(":/warning.png"));
     ui->btnPing->setToolTip(tr("%1: %2").arg(host, message));
 }
 
@@ -166,14 +166,14 @@ void UdpComms::edTxIpEdited(const QString &arg1)
     QHostAddress dest(arg1);
     if (dest == prevAddress) return;
     ui->btnPing->setEnabled(false);
-    ui->btnPing->setIcon(QIcon(":/icons/working.png"));
+    ui->btnPing->setIcon(QIcon(":/working.png"));
     ui->btnPing->setToolTip("Invalid IP");
 }
 
 void UdpComms::doPing()
 {
     ui->btnPing->setEnabled(false);
-    ui->btnPing->setIcon(QIcon(":/icons/working.png"));
+    ui->btnPing->setIcon(QIcon(":/working.png"));
     QHostAddress txAddress(ui->edTxIp->text());
     if (txAddress.protocol() != QAbstractSocket::IPv4Protocol)
     {

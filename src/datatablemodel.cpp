@@ -255,10 +255,10 @@ QIcon DataTableModel::rowIcon(DataDirection direction) const
 {
     switch (direction)
     {
-    case DataReceived: return QIcon(":/icons/received.png");
-    case DataSent: return QIcon(":/icons/sent.png");
-    case DataGoodNote: return QIcon(":/icons/info.png");
-    case DataBadNote: return QIcon(":/icons/warning.png");
+    case DataReceived: return QIcon(":/received.png");
+    case DataSent: return QIcon(":/sent.png");
+    case DataGoodNote: return QIcon(":/info.png");
+    case DataBadNote: return QIcon(":/warning.png");
     default:
         return QIcon();
     }

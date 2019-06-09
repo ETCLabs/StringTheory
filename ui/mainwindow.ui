@@ -14,8 +14,8 @@
    <string/>
   </property>
   <property name="windowIcon">
-   <iconset>
-    <normaloff>:/icons/appicon128w.png</normaloff>:/icons/appicon128w.png</iconset>
+   <iconset resource="../res/resources.qrc">
+    <normaloff>:/appicon32w.png</normaloff>:/appicon32w.png</iconset>
   </property>
   <widget class="QWidget" name="centralWidget">
    <layout class="QGridLayout" name="gridLayout">
