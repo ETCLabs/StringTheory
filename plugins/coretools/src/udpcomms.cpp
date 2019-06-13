@@ -83,7 +83,7 @@ void UdpComms::close()
 void UdpComms::transmit(const QByteArray &data)
 {
     QString dest = ui->edTxIp->text();
-    quint16 port = ui->spinTxPort->value();
+    quint16 port = static_cast<quint16>(ui->spinTxPort->value());
     if (m_udpSocket->writeDatagram(data,
                                    QHostAddress(dest),
                                    port) == -1)

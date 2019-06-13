@@ -19,12 +19,6 @@ QString serialErrorToString(QSerialPort::SerialPortError error)
         return QObject::tr("An error occurred while attempting to open an already opened device by another process or a user not having enough permission and credentials to open.");
     case QSerialPort::OpenError :
         return QObject::tr("An error occurred while attempting to open an already opened device in this object.");
-    case QSerialPort::ParityError :
-        return QObject::tr("Parity error detected by the hardware while reading data.");
-    case QSerialPort::FramingError :
-        return QObject::tr("Framing error detected by the hardware while reading data.");
-    case QSerialPort::BreakConditionError :
-        return QObject::tr("Break condition detected by the hardware on the input line.");
     case QSerialPort::WriteError :
         return QObject::tr("An I/O error occurred while writing the data.");
     case QSerialPort::ReadError :
@@ -33,6 +27,10 @@ QString serialErrorToString(QSerialPort::SerialPortError error)
         return QObject::tr("An I/O error occurred when a resource becomes unavailable, e.g. when the device is unexpectedly removed from the system.");
     case QSerialPort::UnsupportedOperationError :
         return QObject::tr("The requested device operation is not supported or prohibited by the running operating system.");
+    case QSerialPort::TimeoutError :
+        return QObject::tr("A timeout error occurred.");
+    case QSerialPort::UnknownError :
+        return QObject::tr("An unknown error occurred.");
     }
     return QObject::tr("An unidentified error occurred.");
 }
@@ -48,7 +46,7 @@ QString portSettingsString(const QSerialPort &serialPort)
     result += QString::number(serialPort.baudRate());
 
     // Append Data Bits
-    result += "/" + QString::number((int)serialPort.dataBits());
+    result += "/" + QString::number(static_cast<int>(serialPort.dataBits()));
 
     // Append parity
     switch (serialPort.parity())
@@ -244,7 +242,7 @@ void SerialComms::dataReceived()
 
         m_buffer.append(m_serialPort->readAll());
         // Split up
-        char tmpChar = (char)ui->spinBoxSplitChar->value();
+        char tmpChar = static_cast<char>(ui->spinBoxSplitChar->value());
         QList<QByteArray> dataSplitList = m_buffer.split(tmpChar);
 
         // Emit all the split bytes except the last
@@ -322,10 +320,10 @@ void SerialComms::commSettingsChanged()
     }
     // Setup Serial Port
     m_serialPort->setFlowControl(QSerialPort::NoFlowControl);   // No Flow Control
-    m_serialPort->setBaudRate((QSerialPort::BaudRate)ui->cmbBaud->itemData(ui->cmbBaud->currentIndex()).toInt());
-    m_serialPort->setDataBits((QSerialPort::DataBits)ui->cmbDataBits->itemData(ui->cmbDataBits->currentIndex()).toInt());
-    m_serialPort->setParity((QSerialPort::Parity)ui->cmbParity->itemData(ui->cmbParity->currentIndex()).toInt());
-    m_serialPort->setStopBits((QSerialPort::StopBits)ui->cmbStopBits->itemData(ui->cmbStopBits->currentIndex()).toInt());
+    m_serialPort->setBaudRate( static_cast<QSerialPort::BaudRate>(ui->cmbBaud->itemData(ui->cmbBaud->currentIndex()).toInt()));
+    m_serialPort->setDataBits(static_cast<QSerialPort::DataBits>(ui->cmbDataBits->itemData(ui->cmbDataBits->currentIndex()).toInt()));
+    m_serialPort->setParity( static_cast<QSerialPort::Parity>(ui->cmbParity->itemData(ui->cmbParity->currentIndex()).toInt()));
+    m_serialPort->setStopBits( static_cast<QSerialPort::StopBits>(ui->cmbStopBits->itemData(ui->cmbStopBits->currentIndex()).toInt()));
 
     // Let everyone know how we did!
     if (m_serialPort->isOpen())
