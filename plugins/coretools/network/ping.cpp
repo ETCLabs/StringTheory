@@ -8,6 +8,11 @@
 #include <IcmpAPI.h>
 #endif
 
+#ifdef Q_OS_MAC
+#include <QProcess>
+#include <QRegExp>
+#endif
+
 Ping::Ping(QObject *parent) :
     QObject(parent)
 {
@@ -92,5 +97,34 @@ void Ping::ping(QString host, int timeout)
         return;
     }
     return;
+#endif
+
+#ifdef Q_OS_MAC
+    QProcess pingProcess;
+    pingProcess.setProgram(QString("ping"));
+    QStringList arguments;
+    arguments << "-c 1";
+    arguments << QString("-t %1").arg(timeout);
+    arguments << host;
+    pingProcess.setArguments(arguments);
+
+    pingProcess.start();
+    pingProcess.waitForFinished();
+
+    QString data = pingProcess.readAllStandardOutput();
+    if(pingProcess.exitCode()==0)
+    {
+        // Successful Ping
+        QRegExp fromHostRegex("from (.*):.*time=(.*)ms");
+        fromHostRegex.setMinimal(true);
+        fromHostRegex.indexIn(data);
+        QString replyHost = fromHostRegex.cap(1);
+        QString rtt = fromHostRegex.cap(2);
+
+        emit pingSuccess(replyHost, rtt.toInt());
+    }
+    else {
+        emit pingFailure(host, tr("Host Unreachable"));
+    }
 #endif
 }
