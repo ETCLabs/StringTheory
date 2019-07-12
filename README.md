@@ -8,7 +8,7 @@ StringTheory is a simple free, open-source tool to send and recieve string data 
 StringTheory supports Windows (Win 7/Win 10) and MacOS.
 
 # Installation
-An installer for the application is coming soon!
+If you just want to install the program, visit the [Releases](https://github.com/ETCLabs/StringTheory/releases) page to download the installer for the latest release
 
 # Building
 If you are interested in building the application you will need the following:
