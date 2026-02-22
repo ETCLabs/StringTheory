@@ -61,7 +61,7 @@ void TextFormat::setByteArray(const QByteArray data)
 {
     QByteArray tmpData = data;
     // Put final char into the spinbox
-    char finalChar = tmpData.at(tmpData.count()-1);
+    char finalChar = tmpData.at(tmpData.size()-1);
     ui->spinTermChar->setValue(finalChar);
     tmpData.chop(1);
     // Erase all unprintables
@@ -81,6 +81,6 @@ void TextFormat::replaceUnprintableChars(QByteArray &data)
 {
     for (int i=0; i < asciiTableSize; i++)
     {
-        data.replace(asciiTable[i].value, asciiTable[i].label);
+        data.replace(asciiTable[i].value, asciiTable[i].label.toLatin1());
     }
 }

@@ -49,3 +49,5 @@ Makefile*
 
 #MacOS stuff
 .DS_Store
+
+build/
