@@ -51,3 +51,4 @@ Makefile*
 .DS_Store
 
 build/
+app/
