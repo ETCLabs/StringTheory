@@ -120,8 +120,9 @@ win32 {
     DEPLOY_INSTALLER = makensis /DPRODUCT_VERSION="$${PRODUCT_VERSION}" $$shell_quote($$system_path($${_PRO_FILE_PWD_}/install/win/install.nsi))
 }
 macx {
+    QMAKE_APPLE_DEVICE_ARCHS = x86_64 arm64
+    
     VERSION = $$system(echo $$GIT_VERSION | sed 's/[a-zA-Z]//')
-
 
     PLUGINS_SRC = $$system_path($${OUT_PWD}/app/stPlugin_*)
     PLUGINS_DST = $$system_path($${OUT_PWD}/app/StringTheory.app/Contents/MacOS/)
