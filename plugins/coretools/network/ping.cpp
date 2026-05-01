@@ -118,13 +118,16 @@ void Ping::ping(QString host, int timeout)
         QRegularExpression fromHostRegex("from (.*?):.*?time=(.*?)ms");
         const auto match = fromHostRegex.match(data);
 
-        QString replyHost = match.captured(1);
-        QString rtt = match.captured(2);
+        if(match.hasMatch())
+        {
+            QString replyHost = match.captured(1);
+            QString rtt = match.captured(2);
 
-        emit pingSuccess(replyHost, rtt.toInt());
+            emit pingSuccess(replyHost, rtt.toInt());
+            return;
+        }
     }
-    else {
-        emit pingFailure(host, tr("Host Unreachable"));
-    }
+
+    emit pingFailure(host, tr("Host Unreachable"));
 #endif
 }
