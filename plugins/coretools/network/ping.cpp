@@ -115,7 +115,7 @@ void Ping::ping(QString host, int timeout)
     if(pingProcess.exitCode()==0)
     {
         // Successful Ping
-        QRegularExpression fromHostRegex("from (.*):.*time=(.*)ms");
+        QRegularExpression fromHostRegex("from (.*?):.*?time=(.*?)ms");
         const auto match = fromHostRegex.match(data);
 
         QString replyHost = match.captured(1);
