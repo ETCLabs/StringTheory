@@ -1,3 +1,3 @@
 [submodule "install/mac/createdmg"]
 	path = install/mac/createdmg
-	url = git@github.com:create-dmg/create-dmg.git
+	url = https://github.com/create-dmg/create-dmg.git
