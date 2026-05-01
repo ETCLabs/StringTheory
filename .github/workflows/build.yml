@@ -10,7 +10,7 @@ jobs:
     strategy:
       matrix:
         os: [macos-latest, windows-latest]
-        qt-version: ["6.9.3"]
+        qt-version: ["6.8.3"]
         include:
           - os: macos-latest
             artifact: "./install/mac/*.dmg"
