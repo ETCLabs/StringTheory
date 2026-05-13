@@ -45,7 +45,7 @@ void EscFormat::escapeChars(QByteArray &data)
 {
     for (int i=0; i < escTableSize; i++)
     {
-        data.replace(escTable[i].value, escTable[i].label);
+        data.replace(escTable[i].value, escTable[i].label.toLatin1());
     }
 }
 
@@ -53,6 +53,6 @@ void EscFormat::unEscapeChars(QByteArray &data)
 {
     for (int i=0; i < escTableSize; i++)
     {
-        data.replace(escTable[i].label, &escTable[i].value);
+        data.replace(escTable[i].label.toLatin1(), &escTable[i].value);
     }
 }

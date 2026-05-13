@@ -10,7 +10,7 @@
 
 #ifdef Q_OS_MAC
 #include <QProcess>
-#include <QRegExp>
+#include <QRegularExpression>
 #endif
 
 Ping::Ping(QObject *parent) :
@@ -115,16 +115,19 @@ void Ping::ping(QString host, int timeout)
     if(pingProcess.exitCode()==0)
     {
         // Successful Ping
-        QRegExp fromHostRegex("from (.*):.*time=(.*)ms");
-        fromHostRegex.setMinimal(true);
-        fromHostRegex.indexIn(data);
-        QString replyHost = fromHostRegex.cap(1);
-        QString rtt = fromHostRegex.cap(2);
+        QRegularExpression fromHostRegex("from (.*?):.*?time=(.*?)ms");
+        const auto match = fromHostRegex.match(data);
 
-        emit pingSuccess(replyHost, rtt.toInt());
+        if(match.hasMatch())
+        {
+            QString replyHost = match.captured(1);
+            QString rtt = match.captured(2);
+
+            emit pingSuccess(replyHost, rtt.toInt());
+            return;
+        }
     }
-    else {
-        emit pingFailure(host, tr("Host Unreachable"));
-    }
+
+    emit pingFailure(host, tr("Host Unreachable"));
 #endif
 }

@@ -1,0 +1,57 @@
+name: Build StringTheory
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  build:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [macos-latest, windows-latest]
+        qt-version: ["6.8.3"]
+        include:
+          - os: macos-latest
+            artifact: "./install/mac/*.dmg"
+          - os: windows-latest
+            artifact: "./install/win/*.exe"
+    steps:
+      - name: Checkout source
+        uses: actions/checkout@v6
+        with:
+          submodules: 'true'
+
+      - name: Set up Qt
+        uses: jurplel/install-qt-action@v4
+        with:
+          version: ${{ matrix.qt-version }}
+          modules: qtserialport
+
+      - name: Configure MSVC Environment
+        if: matrix.os == 'windows-latest'
+        uses: TheMrMilchmann/setup-msvc-dev@v4
+        with:
+          arch: x64
+      - name: Install NSIS
+        if: matrix.os == 'windows-latest'
+        uses: negrutiu/nsis-install@v2
+
+      - name: Configure project
+        run: qmake StringTheory.pro
+
+      - name: Build (Windows)
+        if: matrix.os == 'windows-latest'
+        run: nmake
+
+      - name: Build (macOS)
+        if: matrix.os == 'macos-latest'
+        shell: bash
+        run: make -j$(sysctl -n hw.ncpu)
+
+      - name: Upload Artifact(s)
+        if: matrix.artifact
+        uses: actions/upload-artifact@v6
+        with:
+          name: ${{ runner.os }}
+          path: ${{ matrix.artifact }}
