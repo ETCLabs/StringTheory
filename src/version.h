@@ -32,12 +32,12 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #ifndef VERSION_H
 #define VERSION_H
 
-#define VER_FILEVERSION             3,0,0,1
+#define VER_FILEVERSION             3,0,1,1
 #define VER_FILEVERSION_STR         VERSION
 
 #define VER_COMPANYNAME_STR         "Electronic Theatre Controls, Ltd"
 #define VER_PRODUCTNAME_STR         "StringTheory"
-#define VER_LEGALCOPYRIGHT_STR      "Copyright (C) 2019-2021 ETC Ltd"
+#define VER_LEGALCOPYRIGHT_STR      "Copyright (C) 2019-2026 ETC Ltd"
 #define VER_LEGALTRADEMARKS1_STR    "All Rights Reserved"
 #define VER_ORIGINALFILENAME_STR    "StringTheory.exe"
 #define VER_COMPANYDOMAIN_STR       "etcconnect.com"

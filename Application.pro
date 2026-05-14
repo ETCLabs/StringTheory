@@ -114,7 +114,7 @@ win32 {
     PRE_DEPLOY_COMMAND += $$QMAKE_COPY $${DEPLOY_TARGET} $${DEPLOY_DIR} $$escape_expand(\\n\\t)
     PRE_DEPLOY_COMMAND += $$QMAKE_COPY $${PLUGINS_SRC} $${PLUGINS_DST} $$escape_expand(\\n\\t)
 
-    DEPLOY_COMMAND = windeployqt
+    DEPLOY_COMMAND = $$[QT_INSTALL_BINS]/windeployqt
     DEPLOY_OPT = --dir $${DEPLOY_DIR} -serialport -network
 
     DEPLOY_INSTALLER = makensis /DPRODUCT_VERSION="$${PRODUCT_VERSION}" $$shell_quote($$system_path($${_PRO_FILE_PWD_}/install/win/install.nsi))
