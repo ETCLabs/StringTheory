@@ -111,6 +111,9 @@ public slots:
                  const QString &info,
                  bool good);
 
+private slots:
+    void updateColorScheme();
+
 private:
     struct DataTableModelRow
     {

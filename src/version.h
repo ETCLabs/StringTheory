@@ -32,7 +32,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #ifndef VERSION_H
 #define VERSION_H
 
-#define VER_FILEVERSION             3,0,1,1
+#define VER_FILEVERSION             3,0,1,2
 #define VER_FILEVERSION_STR         VERSION
 
 #define VER_COMPANYNAME_STR         "Electronic Theatre Controls, Ltd"

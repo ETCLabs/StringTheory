@@ -32,6 +32,8 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include "datatablemodel.h"
 #include "dataentry.h"
 
+#include <QGuiApplication>
+#include <QStyleHints>
 #include <QDebug>
 
 DataTableModel::DataTableModel(QObject *parent) :
@@ -39,14 +41,9 @@ DataTableModel::DataTableModel(QObject *parent) :
 {
     m_data = new QList<DataTableModelRow>;
     m_dataEntry = 0;
-    m_receivedFont;
-    m_receivedColor = Qt::black;
     m_sentFont.setItalic(true);
-    m_sentColor = Qt::darkGray;
-    m_goodNoteFont;
-    m_goodNoteColor = Qt::darkGreen;
-    m_badNoteFont;
-    m_badNoteColor = Qt::darkRed;
+    updateColorScheme();
+    connect(QGuiApplication::styleHints(), &QStyleHints::colorSchemeChanged, this, &DataTableModel::updateColorScheme);
 }
 
 DataTableModel::~DataTableModel()
@@ -305,6 +302,24 @@ QVariant DataTableModel::bytes(const int row, int role) const
             return tr("Doubleclick to copy into 'Data to send'");
     }
     return QVariant();
+}
+
+void DataTableModel::updateColorScheme()
+{
+    if (QGuiApplication::styleHints()->colorScheme() == Qt::ColorScheme::Dark)
+    {
+        m_receivedColor = Qt::white;
+        m_sentColor = Qt::lightGray;
+        m_goodNoteColor = Qt::green;
+        m_badNoteColor = QColor(Qt::red).lighter(130);
+    }
+    else
+    {
+        m_receivedColor = Qt::black;
+        m_sentColor = Qt::darkGray;
+        m_goodNoteColor = Qt::darkGreen;
+        m_badNoteColor = Qt::darkRed;
+    }
 }
 
 FilterDataModel::FilterDataModel(QObject *parent) :
